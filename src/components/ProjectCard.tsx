@@ -13,7 +13,7 @@ type ProjectCardProps = {
   image?: string;
 };
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ title, description }) => {
   return (
     <Card
       sx={{

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Typography, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const About: React.FC = () => {
   return (
@@ -26,9 +27,9 @@ const About: React.FC = () => {
         </Box>
         <Box sx={{ mt: 5 }}>
           <Typography variant="body1" align="center" sx={{ color: 'primary.main', fontWeight: 600 }}>
-            <a href="/about-ceo" style={{ textDecoration: 'none', color: 'inherit', borderBottom: '2px solid #1976d2', paddingBottom: 2, transition: 'border-color 0.2s' }}>
+            <Link to="/about-ceo" style={{ textDecoration: 'none', color: 'inherit', borderBottom: '2px solid #1976d2', paddingBottom: 2, transition: 'border-color 0.2s' }}>
               Learn more <span style={{ fontWeight: 800 }}>About our CEO</span>
-            </a>
+            </Link>
           </Typography>
         </Box>
       </Box>

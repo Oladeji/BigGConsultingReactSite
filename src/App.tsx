@@ -21,13 +21,14 @@ const App: React.FC = () => {
         <Container maxWidth="lg" sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', py: 2 }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
+        
             <Route path="/services" element={<Services />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/technologies" element={<Technologies />} />
             <Route path="/contact" element={<Contact />} />
+                <Route path="/about" element={<About />} />
             <Route path="/about-ceo" element={<AboutCeo />} />
-            <Route path="/about-ceo" element={<AboutCeo />} />
+           
           </Routes>
         </Container>
       </Box>
