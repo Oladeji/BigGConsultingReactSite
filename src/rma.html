@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RMA Request Submission</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        form { max-width: 400px; margin: auto; }
+        label { display: block; margin-top: 1em; }
+        input[type="text"] { width: 100%; padding: 0.5em; }
+        button { margin-top: 1em; padding: 0.5em 1em; }
+        .result { margin-top: 2em; }
+    </style>
+</head>
+<body>
+    <h1>Submit RMA Request</h1>
+    <form id="rmaForm">
+        <label for="CompanyName">Company Name:</label>
+        <input type="text" id="CompanyName" name="CompanyName" required>
+
+        <label for="ContactName">Contact Name:</label>
+        <input type="text" id="ContactName" name="ContactName" required>
+
+        <button type="submit">Submit</button>
+    </form>
+    <div class="result" id="result"></div>
+
+    <script>
+        document.getElementById('rmaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {
+                CompanyName: formData.get('CompanyName'),
+                ContactName: formData.get('ContactName')
+            };
+
+            fetch('https://budrcbbvtuj54eg243hlwjkhme0mwvfi.lambda-url.ca-central-1.on.aws/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(result => {
+                document.getElementById('result').textContent = result;
+            })
+            .catch(error => {
+                document.getElementById('result').textContent = 'Error: ' + error;
+            });
+        });
+    </script>
+</body>
+</html>

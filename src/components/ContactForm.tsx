@@ -2,14 +2,47 @@ import React from 'react';
 import { Button, Box } from '@mui/material';
 
 const ContactForm: React.FC = () => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    // Convert FormData to JSON object
+    const data = {
+      ContactName: formData.get('ContactName'),
+      CompanyName: formData.get('CompanyName'),
+    };
+    
+    // Send JSON data
+    fetch('https://budrcbbvtuj54eg243hlwjkhme0mwvfi.lambda-url.ca-central-1.on.aws', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => {
+      if (response.ok) {
+        // Clear the form
+        form.reset();
+        // Show thank you message
+        alert('Thank you! Your message has been sent successfully.');
+      } else {
+        alert('There was an error sending your message. Please try again.');
+      }
+    })
+    .catch(error => {
+      alert('There was an error sending your message. Please try again.' );
+      console.error('Error:', error);
+    });
+  };
+
   return (
     <>
       <Box 
         component="form" 
-        action="https://localhost:7251/rma"
-        method="POST"
-        target="hidden-iframe"
-          encType="application/x-www-form-urlencoded"
+        onSubmit={handleSubmit}
         sx={{ mt: 4 }}
       >
         <Box sx={{ mb: 2 }}>
@@ -46,7 +79,6 @@ const ContactForm: React.FC = () => {
         
         <Box sx={{ mb: 2 }}>
           <textarea
-            name="message"
             placeholder="Message"
             required
             rows={4}
@@ -65,13 +97,6 @@ const ContactForm: React.FC = () => {
           Send
         </Button>
       </Box>
-      
-      {/* Hidden iframe to capture form submission */}
-      <iframe
-        name="hidden-iframe"
-        style={{ display: 'none' }}
-        title="Hidden iframe for form submission"
-      />
     </>
   );
 };
